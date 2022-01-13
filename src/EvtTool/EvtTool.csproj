@@ -1,0 +1,182 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{579F5C11-5821-4F54-832F-6798F14F6F75}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>EvtTool</RootNamespace>
+    <AssemblyName>EvtTool</AssemblyName>
+    <TargetFrameworkVersion>v4.7</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="CommandDataCodeGenerator.cs" />
+    <Compile Include="Commands\AlEfCommandData.cs" />
+    <Compile Include="Commands\CaaCommandData.cs" />
+    <Compile Include="Commands\CarCommandData.cs" />
+    <Compile Include="Commands\CClpCommandData.cs" />
+    <Compile Include="Commands\ChapCommandData.cs" />
+    <Compile Include="Commands\ChtCommandData.cs" />
+    <Compile Include="Commands\CmCnCommandData.cs" />
+    <Compile Include="Commands\CmdCommandData.cs" />
+    <Compile Include="Commands\CQukCommandData.cs" />
+    <Compile Include="Commands\CsaCommandData.cs" />
+    <Compile Include="Commands\CsdCommandData.cs" />
+    <Compile Include="Commands\CsEcCommandData.cs" />
+    <Compile Include="Commands\CShkCommandData.cs" />
+    <Compile Include="Commands\CwClCommandData.cs" />
+    <Compile Include="Commands\CwHtCommandData.cs" />
+    <Compile Include="Commands\CwPCommandData.cs" />
+    <Compile Include="Commands\DateCommandData.cs" />
+    <Compile Include="Commands\EAlpCommandData.cs" />
+    <Compile Include="Commands\ELdCommandData.cs" />
+    <Compile Include="Commands\EmdCommandData.cs" />
+    <Compile Include="Commands\EnBcCommandData.cs" />
+    <Compile Include="Commands\EnCcCommandData.cs" />
+    <Compile Include="Commands\EnDfCommandData.cs" />
+    <Compile Include="Commands\EnFdCommandData.cs" />
+    <Compile Include="Commands\EnFhCommandData.cs" />
+    <Compile Include="Commands\EnHdCommandData.cs" />
+    <Compile Include="Commands\EnL0CommandData.cs" />
+    <Compile Include="Commands\EnLiCommandData.cs" />
+    <Compile Include="Commands\EnOlCommandData.cs" />
+    <Compile Include="Commands\EnPhCommandData.cs" />
+    <Compile Include="Commands\EnShCommandData.cs" />
+    <Compile Include="Commands\EnvCommandData.cs" />
+    <Compile Include="Commands\ERgsCommandData.cs" />
+    <Compile Include="Commands\ESclCommandData.cs" />
+    <Compile Include="Commands\EsdCommandData.cs" />
+    <Compile Include="Commands\EshCommandData.cs" />
+    <Compile Include="Commands\FaaCommandData.cs" />
+    <Compile Include="Commands\FabCommandData.cs" />
+    <Compile Include="Commands\FbEnCommandData.cs" />
+    <Compile Include="Commands\FdFlCommandData.cs" />
+    <Compile Include="Commands\FdSCommandData.cs" />
+    <Compile Include="Commands\FgFlCommandData.cs" />
+    <Compile Include="Commands\FlbkCommandData.cs" />
+    <Compile Include="Commands\FodCommandData.cs" />
+    <Compile Include="Commands\FrJCommandData.cs" />
+    <Compile Include="Commands\GPoeCommandData.cs" />
+    <Compile Include="Commands\ImDpCommandData.cs" />
+    <Compile Include="Commands\LbxCommandData.cs" />
+    <Compile Include="Commands\MaabCommandData.cs" />
+    <Compile Include="Commands\MaaCommandData.cs" />
+    <Compile Include="Commands\MabCommandData.cs" />
+    <Compile Include="Commands\MaiCommandData.cs" />
+    <Compile Include="Commands\MAlpCommandData.cs" />
+    <Compile Include="Commands\MAtCommandData.cs" />
+    <Compile Include="Commands\MatOCommandData.cs" />
+    <Compile Include="Commands\McSdCommandData.cs" />
+    <Compile Include="Commands\MDtCommandData.cs" />
+    <Compile Include="Commands\MFtsCommandData.cs" />
+    <Compile Include="Commands\MIcCommandData.cs" />
+    <Compile Include="Commands\MLaCommandData.cs" />
+    <Compile Include="Commands\MLdCommandData.cs" />
+    <Compile Include="Commands\MlCommandData.cs" />
+    <Compile Include="Commands\MLwCommandData.cs" />
+    <Compile Include="Commands\MRotCommandData.cs" />
+    <Compile Include="Commands\MSclCommandData.cs" />
+    <Compile Include="Commands\MsdCommandData.cs" />
+    <Compile Include="Commands\MsgCommandData.cs" />
+    <Compile Include="Commands\MsgRCommandData.cs" />
+    <Compile Include="Commands\MsSsCommandData.cs" />
+    <Compile Include="Commands\MvCtCommandData.cs" />
+    <Compile Include="Commands\MvPlCommandData.cs" />
+    <Compile Include="Commands\PbDsCommandData.cs" />
+    <Compile Include="Commands\PbNsCommandData.cs" />
+    <Compile Include="Commands\PbRdCommandData.cs" />
+    <Compile Include="Commands\PbStCommandData.cs" />
+    <Compile Include="Commands\PCcCommandData.cs" />
+    <Compile Include="Commands\PLfCommandData.cs" />
+    <Compile Include="Commands\PRumCommandData.cs" />
+    <Compile Include="Commands\SBEACommandData.cs" />
+    <Compile Include="Commands\SBECommandData.cs" />
+    <Compile Include="Commands\SFltCommandData.cs" />
+    <Compile Include="Commands\SFtsCommandData.cs" />
+    <Compile Include="Commands\SndCommandData.cs" />
+    <Compile Include="Commands\SsCpCommandData.cs" />
+    <Compile Include="Commands\ColCommandData.cs" />
+    <Compile Include="Commands\RgsCommandData.cs" />
+    <Compile Include="Commands\TrMtCommandData.cs" />
+    <Compile Include="Commands\SclCommandData.cs" />
+    <Compile Include="Command.cs" />
+    <Compile Include="CommandData.cs" />
+    <Compile Include="CommandDataFactory.cs" />
+    <Compile Include="EcsFile.cs" />
+    <Compile Include="EvtFile.cs" />
+    <Compile Include="EvtObject.cs" />
+    <Compile Include="EvtObjectType.cs" />
+    <Compile Include="Commands\FdCommandData.cs" />
+    <Compile Include="Commands\GcapCommandData.cs" />
+    <Compile Include="Commands\GgGgCommandData.cs" />
+    <Compile Include="Commands\FsCommandData.cs" />
+    <Compile Include="ICommandList.cs" />
+    <Compile Include="IO\Endianness.cs" />
+    <Compile Include="ISaveable.cs" />
+    <Compile Include="Json\Converters\ByteArrayJsonConverter.cs" />
+    <Compile Include="Json\Converters\DontDeserializeJsonConverter.cs" />
+    <Compile Include="Json\Converters\CommandJsonConverter.cs" />
+    <Compile Include="Json\Converters\IntHexDumpJsonConverter.cs" />
+    <Compile Include="Json\Converters\HexStringJsonConverter.cs" />
+    <Compile Include="IO\AlignmentHelper.cs" />
+    <Compile Include="IO\EndianBinaryReader.cs" />
+    <Compile Include="IO\EndianBinaryWriter.cs" />
+    <Compile Include="IO\EndiannessHelper.cs" />
+    <Compile Include="IO\FileHelper.cs" />
+    <Compile Include="IO\StringBinaryFormat.cs" />
+    <Compile Include="IO\Unsafe.cs" />
+    <Compile Include="Commands\MRgsCommandData.cs" />
+    <Compile Include="Commands\MmdCommandData.cs" />
+    <Compile Include="LsdFile.cs" />
+    <Compile Include="LsdList.cs" />
+    <Compile Include="LsdListEntry.cs" />
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Commands\ScrCommandData.cs" />
+    <Compile Include="Commands\UnknownCommandData.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json">
+      <Version>13.0.1</Version>
+    </PackageReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
