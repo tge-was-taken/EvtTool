@@ -11,6 +11,7 @@ namespace EvtTool
         Enemy       = 0x00000301,
         FieldObject = 0x02000701,
         Image       = 0x00000005,
-        AltField    = 0x00000004
+        AltField    = 0x00000004,
+        Movie       = 0x00000008
     }
 }
