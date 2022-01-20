@@ -1,4 +1,4 @@
-# EvtTool
+# EvtTool [![Build status](https://ci.appveyor.com/api/projects/status/ko4y0o7mm6facymy?svg=true)](https://ci.appveyor.com/project/tge/evttool)
 Persona 5 (Royal) EVT file editor
 
 ## Credits
