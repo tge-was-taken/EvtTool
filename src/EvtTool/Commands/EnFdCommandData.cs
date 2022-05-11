@@ -9,8 +9,8 @@ namespace EvtTool
         public int Field08 { get; set; }
         public int Field0C { get; set; }
         public int Field10 { get; set; }
-        public float Lower_Bounds { get; set; }
-        public float Upper_Bounds { get; set; }
+        public float LowerBounds { get; set; }
+        public float UpperBounds { get; set; }
         public byte Red { get; set; }
         public byte Green { get; set; }
         public byte Blue { get; set; }
@@ -23,8 +23,8 @@ namespace EvtTool
             Field08 = reader.ReadInt32();
             Field0C = reader.ReadInt32();
             Field10 = reader.ReadInt32();
-            Lower_Bounds = reader.ReadSingle();
-            Upper_Bounds = reader.ReadSingle();
+            LowerBounds = reader.ReadSingle();
+            UpperBounds = reader.ReadSingle();
             Red = reader.ReadByte();
             Green = reader.ReadByte();
             Blue = reader.ReadByte();
@@ -38,8 +38,8 @@ namespace EvtTool
             writer.Write( Field08 );
             writer.Write( Field0C );
             writer.Write( Field10 );
-            writer.Write(Lower_Bounds);
-            writer.Write(Upper_Bounds);
+            writer.Write(LowerBounds);
+            writer.Write(UpperBounds);
             writer.Write(Red);
             writer.Write(Green);
             writer.Write(Blue);

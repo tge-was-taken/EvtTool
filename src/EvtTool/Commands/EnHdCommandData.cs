@@ -9,14 +9,14 @@ namespace EvtTool
         public int Field08 { get; set; }
         public int Field0C { get; set; }
         public float Field10 { get; set; }
-        public float Bloom_Strength { get; set; }
+        public float BloomStrength { get; set; }
         public float Field18 { get; set; }
-        public float Bloom_Dampener { get; set; }
+        public float BloomDampener { get; set; }
         public int Field20 { get; set; }
-        public float Glare_Length { get; set; }
-        public float Glare_Strength { get; set; }
+        public float GlareLength { get; set; }
+        public float GlareStrength { get; set; }
         public float Field2C { get; set; }
-        public float Glare_Direction { get; set; }
+        public float GlareDirection { get; set; }
         public float Field34 { get; set; }
         public float Field38 { get; set; }
         public float Field3C { get; set; }
@@ -28,14 +28,14 @@ namespace EvtTool
             Field08 = reader.ReadInt32();
             Field0C = reader.ReadInt32();
             Field10 = reader.ReadSingle();
-            Bloom_Strength = reader.ReadSingle();
+            BloomStrength = reader.ReadSingle();
             Field18 = reader.ReadSingle();
-            Bloom_Dampener = reader.ReadSingle();
+            BloomDampener = reader.ReadSingle();
             Field20 = reader.ReadInt32();
-            Glare_Length = reader.ReadSingle();
-            Glare_Strength = reader.ReadSingle();
+            GlareLength = reader.ReadSingle();
+            GlareStrength = reader.ReadSingle();
             Field2C = reader.ReadSingle();
-            Glare_Direction = reader.ReadSingle();
+            GlareDirection = reader.ReadSingle();
             Field34 = reader.ReadSingle();
             Field38 = reader.ReadSingle();
             Field3C = reader.ReadSingle();
@@ -48,14 +48,14 @@ namespace EvtTool
             writer.Write( Field08 );
             writer.Write( Field0C );
             writer.Write( Field10 );
-            writer.Write( Bloom_Strength );
+            writer.Write( BloomStrength );
             writer.Write( Field18 );
-            writer.Write(Bloom_Dampener);
+            writer.Write(BloomDampener);
             writer.Write( Field20 );
-            writer.Write(Glare_Length);
-            writer.Write( Glare_Strength );
+            writer.Write(GlareLength);
+            writer.Write( GlareStrength );
             writer.Write( Field2C );
-            writer.Write(Glare_Direction);
+            writer.Write(GlareDirection);
             writer.Write( Field34 );
             writer.Write( Field38 );
             writer.Write( Field3C );
