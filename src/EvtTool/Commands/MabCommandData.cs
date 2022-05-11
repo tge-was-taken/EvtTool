@@ -4,10 +4,10 @@ namespace EvtTool
 {
     internal class MabCommandData : CommandData
     {
-        public int Field00 { get; set; }
+        public int Animation_ID { get; set; }
         public int Field04 { get; set; }
-        public int Field08 { get; set; }
-        public float Field0C { get; set; }
+        public int Loop_Bool { get; set; }
+        public float Animation_Speed { get; set; }
         public int Field10 { get; set; }
         public int Field14 { get; set; }
         public int Field18 { get; set; }
@@ -25,10 +25,10 @@ namespace EvtTool
 
         internal override void Read( Command command, EndianBinaryReader reader )
         {
-            Field00 = reader.ReadInt32();
+            Animation_ID = reader.ReadInt32();
             Field04 = reader.ReadInt32();
-            Field08 = reader.ReadInt32();
-            Field0C = reader.ReadSingle();
+            Loop_Bool = reader.ReadInt32();
+            Animation_Speed = reader.ReadSingle();
             Field10 = reader.ReadInt32();
             Field14 = reader.ReadInt32();
             Field18 = reader.ReadInt32();
@@ -48,10 +48,10 @@ namespace EvtTool
 
         internal override void Write( Command command, EndianBinaryWriter writer )
         {
-            writer.Write( Field00 );
+            writer.Write(Animation_ID);
             writer.Write( Field04 );
-            writer.Write( Field08 );
-            writer.Write( Field0C );
+            writer.Write( Loop_Bool );
+            writer.Write(Animation_Speed);
             writer.Write( Field10 );
             writer.Write( Field14 );
             writer.Write( Field18 );

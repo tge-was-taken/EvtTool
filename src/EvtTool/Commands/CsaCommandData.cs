@@ -5,9 +5,9 @@ namespace EvtTool
     public sealed class CsaCommandData : CommandData
     {
         public int Field00 { get; set; }
-        public int Field04 { get; set; }
-        public int Field08 { get; set; }
-        public float Field0C { get; set; }
+        public int Camera_Object_ID { get; set; }
+        public int Camera_Animation { get; set; }
+        public float Camera_Speed { get; set; }
         public int Field10 { get; set; }
         public float Field14 { get; set; }
         public float Field18 { get; set; }
@@ -32,9 +32,9 @@ namespace EvtTool
         internal override void Read( Command command, EndianBinaryReader reader )
         {
             Field00 = reader.ReadInt32();
-            Field04 = reader.ReadInt32();
-            Field08 = reader.ReadInt32();
-            Field0C = reader.ReadSingle();
+            Camera_Object_ID = reader.ReadInt32();
+            Camera_Animation = reader.ReadInt32();
+            Camera_Speed = reader.ReadSingle();
             Field10 = reader.ReadInt32();
             Field14 = reader.ReadSingle();
             Field18 = reader.ReadSingle();
@@ -60,9 +60,9 @@ namespace EvtTool
         internal override void Write( Command command, EndianBinaryWriter writer )
         {
             writer.Write( Field00 );
-            writer.Write( Field04 );
-            writer.Write( Field08 );
-            writer.Write( Field0C );
+            writer.Write(Camera_Object_ID);
+            writer.Write(Camera_Animation);
+            writer.Write(Camera_Speed);
             writer.Write( Field10 );
             writer.Write( Field14 );
             writer.Write( Field18 );
