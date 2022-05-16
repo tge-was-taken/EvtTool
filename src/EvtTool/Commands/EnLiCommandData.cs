@@ -39,10 +39,10 @@ namespace EvtTool
             writer.Write( Field04 );
             writer.Write( Field08 );
             writer.Write( Field0C );
-            writer.Write( Field10 );
-            writer.Write( Field14 );
-            writer.Write( Field18 );
-            writer.Write( Field1C );
+            writer.Write(Field10);
+            writer.Write(Field14);
+            writer.Write(Field18);
+            writer.Write(Field1C);
             writer.Write( Field20 );
             writer.Write( Field24 );
             writer.Write( Field28 );
