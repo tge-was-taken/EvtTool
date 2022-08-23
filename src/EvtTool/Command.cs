@@ -28,9 +28,9 @@ namespace EvtTool
 
         public int Field20 { get; set; }
 
-        public int Field24 { get; set; }
+        public int LocalDataID { get; set; }
 
-        public int Field28 { get; set; }
+        public int LocalDataValue { get; set; }
 
         public int Field2C { get; set; }
 
@@ -49,8 +49,8 @@ namespace EvtTool
             var dataOffset = reader.ReadInt32();
             DataSize = reader.ReadInt32();
             Field20 = reader.ReadInt32();
-            Field24 = reader.ReadInt32();
-            Field28 = reader.ReadInt32();
+            LocalDataID = reader.ReadInt32();
+            LocalDataValue = reader.ReadInt32();
             Field2C = reader.ReadInt32();
 
             reader.ReadAtOffset( dataOffset, () =>
@@ -72,8 +72,8 @@ namespace EvtTool
             writer.ScheduleOffsetWrite( () => Data.Write( this, writer ) );
             writer.Write( DataSize );
             writer.Write( Field20 );
-            writer.Write( Field24 );
-            writer.Write( Field28 );
+            writer.Write(LocalDataID);
+            writer.Write(LocalDataValue);
             writer.Write( Field2C );
         }
 
