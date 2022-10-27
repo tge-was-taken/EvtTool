@@ -6,23 +6,23 @@ namespace EvtTool
     {
         public int Field00 { get; set; }
         public int Field04 { get; set; }
-        public float Field08 { get; set; }
-        public float Field0C { get; set; }
+        public float NearClip { get; set; }
+        public float FarClip { get; set; }
 
         internal override void Read( Command command, EndianBinaryReader reader )
         {
             Field00 = reader.ReadInt32();
             Field04 = reader.ReadInt32();
-            Field08 = reader.ReadSingle();
-            Field0C = reader.ReadSingle();
+            NearClip = reader.ReadSingle();
+            FarClip = reader.ReadSingle();
         }
 
         internal override void Write( Command command, EndianBinaryWriter writer )
         {
             writer.Write( Field00 );
             writer.Write( Field04 );
-            writer.Write( Field08 );
-            writer.Write( Field0C );
+            writer.Write( NearClip );
+            writer.Write( FarClip );
         }
     }
 }

@@ -5,10 +5,10 @@ namespace EvtTool
     public class MsgCommandData : CommandData
     {
         public int Field00 { get; set; }
-        public short MessageId { get; set; }
-        public short Field06 { get; set; }
-        public short Field08 { get; set; }
-        public short Field0A { get; set; }
+        public short MessageMajorId { get; set; }
+        public short MessageMinorId { get; set; }
+        public short SelectMajorId { get; set; }
+        public short SelectMinorId { get; set; }
         public int Field0C { get; set; }
         public int Field10 { get; set; }
         public float Field14 { get; set; }
@@ -38,10 +38,10 @@ namespace EvtTool
         internal override void Read( Command command, EndianBinaryReader reader )
         {
             Field00 = reader.ReadInt32();
-            MessageId = reader.ReadInt16();
-            Field06 = reader.ReadInt16();
-            Field08 = reader.ReadInt16();
-            Field0A = reader.ReadInt16();
+            MessageMajorId = reader.ReadInt16();
+            MessageMinorId = reader.ReadInt16();
+            SelectMajorId = reader.ReadInt16();
+            SelectMinorId = reader.ReadInt16();
             Field0C = reader.ReadInt32();
             Field10 = reader.ReadInt32();
             Field14 = reader.ReadSingle();
@@ -72,10 +72,10 @@ namespace EvtTool
         internal override void Write( Command command, EndianBinaryWriter writer )
         {
             writer.Write( Field00 );
-            writer.Write( MessageId );
-            writer.Write( Field06 );
-            writer.Write( Field08 );
-            writer.Write( Field0A );
+            writer.Write( MessageMajorId );
+            writer.Write( MessageMinorId );
+            writer.Write( SelectMajorId );
+            writer.Write( SelectMinorId );
             writer.Write( Field0C );
             writer.Write( Field10 );
             writer.Write( Field14 );
