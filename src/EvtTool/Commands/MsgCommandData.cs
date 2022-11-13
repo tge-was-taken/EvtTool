@@ -9,7 +9,7 @@ namespace EvtTool
         public short MessageMinorId { get; set; }
         public short SelectMajorId { get; set; }
         public short SelectMinorId { get; set; }
-        public int Field0C { get; set; }
+        public int LocalDataSelStorageId  { get; set; }
         public int Field10 { get; set; }
         public float Field14 { get; set; }
         public float Field18 { get; set; }
@@ -42,7 +42,7 @@ namespace EvtTool
             MessageMinorId = reader.ReadInt16();
             SelectMajorId = reader.ReadInt16();
             SelectMinorId = reader.ReadInt16();
-            Field0C = reader.ReadInt32();
+            LocalDataSelStorageId  = reader.ReadInt32();
             Field10 = reader.ReadInt32();
             Field14 = reader.ReadSingle();
             Field18 = reader.ReadSingle();
@@ -76,7 +76,7 @@ namespace EvtTool
             writer.Write( MessageMinorId );
             writer.Write( SelectMajorId );
             writer.Write( SelectMinorId );
-            writer.Write( Field0C );
+            writer.Write( LocalDataSelStorageId  );
             writer.Write( Field10 );
             writer.Write( Field14 );
             writer.Write( Field18 );
