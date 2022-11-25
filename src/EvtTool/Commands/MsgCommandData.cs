@@ -7,9 +7,11 @@ namespace EvtTool
         public int Field00 { get; set; }
         public short MessageMajorId { get; set; }
         public short MessageMinorId { get; set; }
+        public short MessageSubId { get; set; }
         public short SelectMajorId { get; set; }
-        public short SelectMinorId { get; set; }
-        public int LocalDataSelStorageId  { get; set; }
+        public byte SelectMinorId { get; set; }
+        public byte SelectSubId { get; set; }
+        public int EvtLocalDataIdSelStorage  { get; set; }
         public int Field10 { get; set; }
         public float Field14 { get; set; }
         public float Field18 { get; set; }
@@ -39,10 +41,12 @@ namespace EvtTool
         {
             Field00 = reader.ReadInt32();
             MessageMajorId = reader.ReadInt16();
-            MessageMinorId = reader.ReadInt16();
+            MessageMinorId = reader.ReadByte();
+            MessageSubId = reader.ReadByte();
             SelectMajorId = reader.ReadInt16();
-            SelectMinorId = reader.ReadInt16();
-            LocalDataSelStorageId  = reader.ReadInt32();
+            SelectMinorId = reader.ReadByte();
+            SelectSubId = reader.ReadByte();
+            EvtLocalDataIdSelStorage  = reader.ReadInt32();
             Field10 = reader.ReadInt32();
             Field14 = reader.ReadSingle();
             Field18 = reader.ReadSingle();
@@ -76,7 +80,8 @@ namespace EvtTool
             writer.Write( MessageMinorId );
             writer.Write( SelectMajorId );
             writer.Write( SelectMinorId );
-            writer.Write( LocalDataSelStorageId  );
+            writer.Write( SelectSubId );
+            writer.Write( EvtLocalDataIdSelStorage  );
             writer.Write( Field10 );
             writer.Write( Field14 );
             writer.Write( Field18 );

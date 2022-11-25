@@ -2,6 +2,7 @@ using System.Text;
 using EvtTool.IO;
 using EvtTool.Json.Converters;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace EvtTool
 {
@@ -20,19 +21,21 @@ namespace EvtTool
 
         public int Field0C { get; set; }
 
-        public int Time { get; set; }
+        public int Frame { get; set; }
 
         public int Duration { get; set; }
 
         public int DataSize { get; set; }
 
-        public int Field20 { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public evtFlagType EvtFlagType { get; set; }
 
-        public int LocalDataID { get; set; }
+        public int EvtFlagId { get; set; }
 
-        public int LocalDataValue { get; set; }
+        public int EvtFlagValue { get; set; }
 
-        public int Field2C { get; set; }
+        [JsonConverter(typeof(StringEnumConverter))]
+        public evtFlagConditionalType EvtFlagConditionalType { get; set; }
 
         [JsonConverter(typeof( DontDeserializeJsonConverter ) )]
         public CommandData Data { get; set; }
@@ -44,14 +47,14 @@ namespace EvtTool
             Field06 = reader.ReadInt16();
             ObjectId = reader.ReadInt32();
             Field0C = reader.ReadInt32();
-            Time = reader.ReadInt32();
+            Frame = reader.ReadInt32();
             Duration = reader.ReadInt32();
             var dataOffset = reader.ReadInt32();
             DataSize = reader.ReadInt32();
-            Field20 = reader.ReadInt32();
-            LocalDataID = reader.ReadInt32();
-            LocalDataValue = reader.ReadInt32();
-            Field2C = reader.ReadInt32();
+            EvtFlagType = (evtFlagType)reader.ReadInt32();
+            EvtFlagId = reader.ReadInt32();
+            EvtFlagValue = reader.ReadInt32();
+            EvtFlagConditionalType = (evtFlagConditionalType)reader.ReadInt32();
 
             reader.ReadAtOffset( dataOffset, () =>
             {
@@ -67,14 +70,33 @@ namespace EvtTool
             writer.Write( (short)Field06 );
             writer.Write( ObjectId );
             writer.Write( Field0C );
-            writer.Write( Time );
+            writer.Write( Frame );
             writer.Write( Duration );
             writer.ScheduleOffsetWrite( () => Data.Write( this, writer ) );
             writer.Write( DataSize );
-            writer.Write( Field20 );
-            writer.Write(LocalDataID);
-            writer.Write(LocalDataValue);
-            writer.Write( Field2C );
+            writer.Write( (int)EvtFlagType );
+            writer.Write(EvtFlagId);
+            writer.Write(EvtFlagValue);
+            writer.Write( (int)EvtFlagConditionalType );
+        }
+
+        public enum evtFlagType
+        {
+            None = 0,
+            Adachi_False = 1,
+            Evt_Local_Data = 2,
+            Bitflag = 3,
+            Count = 4
+        }
+
+        public enum evtFlagConditionalType
+        { 
+            FlagValue_Equals_FlagIdResult = 0,
+            FlagValue_DoesNotEqual_FlagIdResult = 1,
+            FlagValue_IsLessThan_FlagIdResult = 2,
+            FlagValue_IsMoreThan_FlagIdResult = 3,
+            FlagValue_IsLessThanEqualTo_FlagIdResult = 4,
+            FlagValue_IsMoreThanEqualTo_FlagIdResult = 5,
         }
 
     }
