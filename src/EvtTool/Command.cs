@@ -30,7 +30,7 @@ namespace EvtTool
         [JsonConverter(typeof(StringEnumConverter))]
         public evtFlagType EvtFlagType { get; set; }
 
-        public int EvtFlagId { get; set; }
+        public uint EvtFlagId { get; set; }
 
         public int EvtFlagValue { get; set; }
 
@@ -52,7 +52,7 @@ namespace EvtTool
             var dataOffset = reader.ReadInt32();
             DataSize = reader.ReadInt32();
             EvtFlagType = (evtFlagType)reader.ReadInt32();
-            EvtFlagId = reader.ReadInt32();
+            EvtFlagId = reader.ReadUInt32(); FlagConvert();
             EvtFlagValue = reader.ReadInt32();
             EvtFlagConditionalType = (evtFlagConditionalType)reader.ReadInt32();
 
@@ -99,5 +99,25 @@ namespace EvtTool
             FlagValue_IsMoreThanEqualTo_FlagIdResult = 5,
         }
 
+        public void FlagConvert()
+        {
+            if (EvtFlagType == evtFlagType.Bitflag)
+            {
+                if (EvtFlagId  >= 0x5000000)
+                { EvtFlagId = (EvtFlagId - 0x5000000) + 12288; }
+
+                else if (EvtFlagId >= 0x4000000)
+                { EvtFlagId = (EvtFlagId - 0x4000000) + 11776; }
+
+                else if (EvtFlagId >= 0x3000000)
+                { EvtFlagId = (EvtFlagId - 0x3000000) + 11264; }
+
+                else if (EvtFlagId >= 0x2000000)
+                { EvtFlagId = (EvtFlagId - 0x2000000) + 6144; }
+
+                else if (EvtFlagId >= 0x1000000)
+                { EvtFlagId = (EvtFlagId - 0x1000000) + 3072; }
+            }
+        }
     }
 }
