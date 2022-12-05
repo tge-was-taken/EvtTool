@@ -6,8 +6,8 @@ namespace EvtTool
     {
         public int Field00 { get; set; }
         public short MessageMajorId { get; set; }
-        public short MessageMinorId { get; set; }
-        public short MessageSubId { get; set; }
+        public byte MessageMinorId { get; set; }
+        public byte MessageSubId { get; set; }
         public short SelectMajorId { get; set; }
         public byte SelectMinorId { get; set; }
         public byte SelectSubId { get; set; }

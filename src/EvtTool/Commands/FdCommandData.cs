@@ -39,8 +39,8 @@ namespace EvtTool
 
         public enum fadeMode
         {
-            FadeIn = 2,
             FadeOut = 1,
+            FadeIn = 2
         }
     }
 }
