@@ -4,7 +4,7 @@ namespace EvtTool
 {
     public class MsgCommandData : CommandData
     {
-        public int Field00 { get; set; }
+        public MessageBitfield MessageMode { get; set; }
         public short MessageMajorId { get; set; }
         public byte MessageMinorId { get; set; }
         public byte MessageSubId { get; set; }
@@ -39,7 +39,10 @@ namespace EvtTool
 
         internal override void Read( Command command, EndianBinaryReader reader )
         {
-            Field00 = reader.ReadInt32();
+            MessageMode = new MessageBitfield();
+            {
+                MessageMode.data = reader.ReadInt32();
+            };
             MessageMajorId = reader.ReadInt16();
             MessageMinorId = reader.ReadByte();
             MessageSubId = reader.ReadByte();
@@ -75,9 +78,10 @@ namespace EvtTool
 
         internal override void Write( Command command, EndianBinaryWriter writer )
         {
-            writer.Write( Field00 );
+            writer.Write(MessageMode.data);
             writer.Write( MessageMajorId );
             writer.Write( MessageMinorId );
+            writer.Write( MessageSubId );
             writer.Write( SelectMajorId );
             writer.Write( SelectMinorId );
             writer.Write( SelectSubId );
@@ -104,6 +108,29 @@ namespace EvtTool
                 writer.Write( Entries[ i ].Unknown1 );
                 writer.Write( Entries[i].Unknown2 );
                 writer.Write( Entries[i].Unknown3 );
+            }
+        }
+
+        public class MessageBitfield
+        {
+            internal int data { get; set; }
+
+            public bool HasMessage
+            {
+                get { return (data & 1) == 1; }
+                set { data += (value ? 1 : 0); }
+            }
+
+            public bool HasSelect
+            {
+                get { return (data & 2) == 2; }
+                set { data += (value ? 1 : 0) << 1; }
+            }
+
+            public bool IsSubtitle
+            {
+                get { return (data & 4) == 4; }
+                set { data += (value ? 1 : 0) << 2; }
             }
         }
     }
