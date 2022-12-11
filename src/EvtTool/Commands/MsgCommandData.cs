@@ -4,7 +4,7 @@ namespace EvtTool
 {
     public class MsgCommandData : CommandData
     {
-        public MessageBitfield MessageMode { get; set; }
+        public MessageModeBitfield MessageMode { get; set; }
         public short MessageMajorId { get; set; }
         public byte MessageMinorId { get; set; }
         public byte MessageSubId { get; set; }
@@ -39,7 +39,7 @@ namespace EvtTool
 
         internal override void Read( Command command, EndianBinaryReader reader )
         {
-            MessageMode = new MessageBitfield();
+            MessageMode = new MessageModeBitfield();
             {
                 MessageMode.data = reader.ReadInt32();
             };
@@ -111,7 +111,7 @@ namespace EvtTool
             }
         }
 
-        public class MessageBitfield
+        public class MessageModeBitfield
         {
             internal int data { get; set; }
 
