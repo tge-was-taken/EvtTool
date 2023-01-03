@@ -4,12 +4,14 @@ namespace EvtTool
 {
     public class MsgCommandData : CommandData
     {
-        public int Field00 { get; set; }
+        public MessageModeBitfield MessageMode { get; set; }
         public short MessageMajorId { get; set; }
-        public short MessageMinorId { get; set; }
+        public byte MessageMinorId { get; set; }
+        public byte MessageSubId { get; set; }
         public short SelectMajorId { get; set; }
-        public short SelectMinorId { get; set; }
-        public int Field0C { get; set; }
+        public byte SelectMinorId { get; set; }
+        public byte SelectSubId { get; set; }
+        public int EvtLocalDataIdSelStorage  { get; set; }
         public int Field10 { get; set; }
         public float Field14 { get; set; }
         public float Field18 { get; set; }
@@ -37,12 +39,17 @@ namespace EvtTool
 
         internal override void Read( Command command, EndianBinaryReader reader )
         {
-            Field00 = reader.ReadInt32();
+            MessageMode = new MessageModeBitfield();
+            {
+                MessageMode.data = reader.ReadInt32();
+            };
             MessageMajorId = reader.ReadInt16();
-            MessageMinorId = reader.ReadInt16();
+            MessageMinorId = reader.ReadByte();
+            MessageSubId = reader.ReadByte();
             SelectMajorId = reader.ReadInt16();
-            SelectMinorId = reader.ReadInt16();
-            Field0C = reader.ReadInt32();
+            SelectMinorId = reader.ReadByte();
+            SelectSubId = reader.ReadByte();
+            EvtLocalDataIdSelStorage  = reader.ReadInt32();
             Field10 = reader.ReadInt32();
             Field14 = reader.ReadSingle();
             Field18 = reader.ReadSingle();
@@ -71,12 +78,14 @@ namespace EvtTool
 
         internal override void Write( Command command, EndianBinaryWriter writer )
         {
-            writer.Write( Field00 );
+            writer.Write(MessageMode.data);
             writer.Write( MessageMajorId );
             writer.Write( MessageMinorId );
+            writer.Write( MessageSubId );
             writer.Write( SelectMajorId );
             writer.Write( SelectMinorId );
-            writer.Write( Field0C );
+            writer.Write( SelectSubId );
+            writer.Write( EvtLocalDataIdSelStorage  );
             writer.Write( Field10 );
             writer.Write( Field14 );
             writer.Write( Field18 );
@@ -99,6 +108,29 @@ namespace EvtTool
                 writer.Write( Entries[ i ].Unknown1 );
                 writer.Write( Entries[i].Unknown2 );
                 writer.Write( Entries[i].Unknown3 );
+            }
+        }
+
+        public class MessageModeBitfield
+        {
+            internal int data { get; set; }
+
+            public bool HasMessage
+            {
+                get { return (data & 1) == 1; }
+                set { data += (value ? 1 : 0); }
+            }
+
+            public bool HasSelect
+            {
+                get { return (data & 2) == 2; }
+                set { data += (value ? 1 : 0) << 1; }
+            }
+
+            public bool IsSubtitle
+            {
+                get { return (data & 4) == 4; }
+                set { data += (value ? 1 : 0) << 2; }
             }
         }
     }
