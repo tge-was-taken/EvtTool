@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -58,17 +59,17 @@ namespace EvtTool
 
         public int Field4C { get; set; }
 
-        public string Field50 { get; set; }
+        public string EventBmdPath { get; set; }
 
-        public int Field54 { get; set; }
+        public int EventBmdPathLength { get; set; }
 
         public int Field58 { get; set; }
 
         public int Field5C { get; set; }
 
-        public int Field60 { get; set; }
+        public string EventBfPath { get; set; }
 
-        public int Field64 { get; set; }
+        public int EventBfPathLength { get; set; }
 
         public int Field68 { get; set; }
 
@@ -250,12 +251,12 @@ namespace EvtTool
             var commandSize = reader.ReadInt32();
             Trace.Assert( commandSize == Command.SIZE, $"Command size != {Command.SIZE}" );
             Field4C = reader.ReadInt32();
-            var PointerToField50 = reader.ReadInt32();
-            Field54 = reader.ReadInt32();
+            var PointerToEventBmdPath = reader.ReadInt32();
+            EventBmdPathLength = reader.ReadInt32();
             Field58 = reader.ReadInt32();
             Field5C = reader.ReadInt32();
-            Field60 = reader.ReadInt32();
-            Field64 = reader.ReadInt32();
+            var PointerToEventBfPath = reader.ReadInt32();
+            EventBfPathLength = reader.ReadInt32();
             Field68 = reader.ReadInt32();
             Field6C = reader.ReadInt32();
             Field70 = reader.ReadInt32();
@@ -309,13 +310,10 @@ namespace EvtTool
                 Field128 = reader.ReadInt32();
                 Field12C = reader.ReadInt32();
             }
-            if (PointerToField50 > 0)
-            {
-                reader.Seek(PointerToField50, SeekOrigin.Begin);
-                Field50 = reader.ReadString(StringBinaryFormat.NullTerminated);
-            }
-            else Field50 = "Null";
 
+            EventBmdPath = GetEvtString(reader, PointerToEventBmdPath);
+
+            EventBfPath = GetEvtString(reader, PointerToEventBfPath);
 
             reader.SeekBegin( objectOffset );
             Objects.Capacity = objectCount;
@@ -334,6 +332,16 @@ namespace EvtTool
                 command.Read( reader );
                 Commands.Add( command );
             }
+        }
+        
+        internal string GetEvtString(EndianBinaryReader reader, int pointerToString)
+        {
+            if (pointerToString > 0)
+            {
+                reader.Seek(pointerToString, SeekOrigin.Begin);
+                return reader.ReadString(StringBinaryFormat.NullTerminated);
+            }
+            else return "Null";
         }
 
         internal void Write( EndianBinaryWriter writer )
@@ -370,13 +378,14 @@ namespace EvtTool
             writer.ScheduleOffsetWrite( () => Commands.ForEach( c => c.Write( writer ) ) );
             writer.Write( Command.SIZE );
             writer.Write( Field4C );
-            writer.Write( (int) 0 );
-            //writer.Write( Field50 );
-            writer.Write( Field54 );
+            writer.Write( (int) 0 ); // dummy bmd pointer, field50
+            //writer.Write( EventBmdPath );
+            writer.Write( EventBmdPathLength );
             writer.Write( Field58 );
             writer.Write( Field5C );
-            writer.Write( Field60 );
-            writer.Write( Field64 );
+            writer.Write((int)0); // dummy bf pointer, field60
+            //writer.Write( EventBfPath );
+            writer.Write( EventBfPathLength );
             writer.Write( Field68 );
             writer.Write( Field6C );
             writer.Write( Field70 );
@@ -433,25 +442,32 @@ namespace EvtTool
 
             writer.PerformScheduledWrites();
 
-            if (Field50 == "Null")
-                return;
+            WriteEvtString(writer, EventBmdPath, 0x50);
 
-            // original EVT files have bmd string at the end, this makes no difference but i want them to be as 1:1 as possible :raidoufrost:
-            writer.SeekBegin( writer.Length );
-            int currentPos = (int) writer.Position;
-            writer.Write(Field50, StringBinaryFormat.NullTerminated);
+            WriteEvtString(writer, EventBfPath, 0x60);
+        }
 
-            // padding
-            if (((0x10 - writer.Position % 0x10) % 0x10) > 0)
-                writer.WritePadding((int)((0x10 - writer.Position % 0x10) % 0x10));
+        void WriteEvtString(EndianBinaryWriter writer, string filePath, int pointerToString)
+        {
+            if (filePath != "Null")
+            {
+                // original EVT files have bmd string at the end, this makes no difference but i want them to be as 1:1 as possible :raidoufrost:
+                writer.SeekBegin(writer.Length);
+                int currentPos = (int)writer.Position;
 
-            // write string offset
-            writer.SeekBegin( 0x50 );
-            writer.Write( currentPos );
+                var padding = 0x10 - (filePath.Length % 0x10);
 
-            // fix filesize
-            writer.SeekBegin( 0x10) ;
-            writer.Write( (int) writer.Length );
+                writer.Write(filePath, StringBinaryFormat.FixedLength, filePath.Length + padding);
+
+                // write string offset
+                writer.SeekBegin(pointerToString);
+                writer.Write(currentPos);
+                writer.Write(filePath.Length + padding);
+
+                // fix filesize
+                writer.SeekBegin(0x10);
+                writer.Write((int)writer.Length);
+            }
         }
     }
 }
