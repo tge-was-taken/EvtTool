@@ -19,7 +19,7 @@ namespace EvtTool
 
         public int ObjectId { get; set; }
 
-        public int Field0C { get; set; }
+        public int ForceSkipCommand { get; set; }
 
         public int Frame { get; set; }
 
@@ -46,7 +46,7 @@ namespace EvtTool
             Field04 = reader.ReadInt16();
             Field06 = reader.ReadInt16();
             ObjectId = reader.ReadInt32();
-            Field0C = reader.ReadInt32();
+            ForceSkipCommand = reader.ReadInt32();
             Frame = reader.ReadInt32();
             Duration = reader.ReadInt32();
             var dataOffset = reader.ReadInt32();
@@ -69,7 +69,7 @@ namespace EvtTool
             writer.Write( (short)Field04 );
             writer.Write( (short)Field06 );
             writer.Write( ObjectId );
-            writer.Write( Field0C );
+            writer.Write( ForceSkipCommand );
             writer.Write( Frame );
             writer.Write( Duration );
             writer.ScheduleOffsetWrite( () => Data.Write( this, writer ) );
