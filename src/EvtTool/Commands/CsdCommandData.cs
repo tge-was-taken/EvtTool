@@ -5,7 +5,7 @@ namespace EvtTool
 {
     public class CsdCommandData : CommandData
     {
-        public int Field00 { get; set; }
+        public int SomeCameraBitfield { get; set; }
         public Vector3 Position { get; set; }
         public Vector3 Rotation { get; set; } // in degrees
         public float Fov { get; set; }
@@ -24,7 +24,7 @@ namespace EvtTool
 
         internal override void Read( Command command, EndianBinaryReader reader )
         {
-            Field00 = reader.ReadInt32();
+            SomeCameraBitfield = reader.ReadInt32();
             Position = reader.ReadVector3();
             Rotation = reader.ReadVector3();
             Fov = reader.ReadSingle();
@@ -44,7 +44,7 @@ namespace EvtTool
 
         internal override void Write( Command command, EndianBinaryWriter writer )
         {
-            writer.Write( Field00 );
+            writer.Write( SomeCameraBitfield );
             writer.Write( Position );
             writer.Write( Rotation );
             writer.Write( Fov );

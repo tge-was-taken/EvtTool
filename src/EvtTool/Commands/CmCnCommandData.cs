@@ -1,28 +1,42 @@
 using EvtTool.IO;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Converters;
 
 namespace EvtTool
 {
     public sealed class CmCnCommandData : CommandData
     {
-        public int Field00 { get; set; }
-        public int Field04 { get; set; }
-        public float Field08 { get; set; }
-        public int Field0C { get; set; }
+        public int Unused00 { get; set; }
+
+        [JsonConverter(typeof(StringEnumConverter))]
+        public Direction DirectionIndex { get; set; }
+        public float Distance { get; set; }
+        public int Unused0C { get; set; }
 
         internal override void Read( Command command, EndianBinaryReader reader )
         {
-            Field00 = reader.ReadInt32();
-            Field04 = reader.ReadInt32();
-            Field08 = reader.ReadSingle();
-            Field0C = reader.ReadInt32();
+            Unused00 = reader.ReadInt32();
+            DirectionIndex = (Direction)reader.ReadInt32();
+            Distance = reader.ReadSingle();
+            Unused0C = reader.ReadInt32();
         }
 
         internal override void Write( Command command, EndianBinaryWriter writer )
         {
-            writer.Write( Field00 );
-            writer.Write( Field04 );
-            writer.Write( Field08 );
-            writer.Write( Field0C );
+            writer.Write( Unused00 );
+            writer.Write( (int)DirectionIndex );
+            writer.Write( Distance );
+            writer.Write( Unused0C );
+        }
+
+        public enum Direction
+        {
+            Forward = 1,
+            Backward = 2,
+            Left = 3,
+            Right = 4,
+            Up = 5,
+            Down = 6
         }
     }
 }

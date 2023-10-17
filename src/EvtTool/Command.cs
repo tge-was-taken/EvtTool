@@ -30,6 +30,7 @@ namespace EvtTool
         [JsonConverter(typeof(StringEnumConverter))]
         public evtFlagType EvtFlagType { get; set; }
 
+        [JsonConverter(typeof(HexStringJsonConverter))]
         public uint EvtFlagId { get; set; }
 
         public int EvtFlagValue { get; set; }
@@ -52,7 +53,7 @@ namespace EvtTool
             var dataOffset = reader.ReadInt32();
             DataSize = reader.ReadInt32();
             EvtFlagType = (evtFlagType)reader.ReadInt32();
-            EvtFlagId = reader.ReadUInt32(); FlagConvert();
+            EvtFlagId = reader.ReadUInt32(); // FlagConvert();
             EvtFlagValue = reader.ReadInt32();
             EvtFlagConditionalType = (evtFlagConditionalType)reader.ReadInt32();
 
@@ -86,7 +87,8 @@ namespace EvtTool
             Adachi_False = 1,
             Evt_Local_Data = 2,
             Bitflag = 3,
-            Count = 4
+            Count = 4,
+            Evt_Anim_Data = 5
         }
 
         public enum evtFlagConditionalType
