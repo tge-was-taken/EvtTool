@@ -1,10 +1,11 @@
 using EvtTool.IO;
+using static EvtTool.MsgCommandData;
 
 namespace EvtTool
 {
     public sealed class MsgRCommandData : CommandData
     {
-        public int Field00 { get; set; }
+        public MessageModeBitfield MessageMode { get; set; }
         public int MessageIndex { get; set; }
         public int SelIndex { get; set; }
         public int LocalDataIdSelStorage { get; set; }
@@ -15,7 +16,10 @@ namespace EvtTool
 
         internal override void Read( Command command, EndianBinaryReader reader )
         {
-            Field00 = reader.ReadInt32();
+            MessageMode = new MessageModeBitfield();
+            {
+                MessageMode.data = reader.ReadInt32();
+            };
             MessageIndex = reader.ReadInt32();
             SelIndex = reader.ReadInt32();
             LocalDataIdSelStorage = reader.ReadInt32();
@@ -27,7 +31,7 @@ namespace EvtTool
 
         internal override void Write( Command command, EndianBinaryWriter writer )
         {
-            writer.Write( Field00 );
+            writer.Write(MessageMode.data);
             writer.Write( MessageIndex );
             writer.Write( SelIndex );
             writer.Write( LocalDataIdSelStorage );

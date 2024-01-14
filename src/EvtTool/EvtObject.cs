@@ -1,4 +1,5 @@
 using EvtTool.IO;
+using EvtTool.Json.Converters;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Converters;
 
@@ -15,7 +16,7 @@ namespace EvtTool
 
         public int Field08 { get; set; }
 
-        public int Field0C { get; set; }
+        public int DuplicateObjectIndex { get; set; }
 
         public int ResourceMajorId { get; set; }
 
@@ -23,7 +24,8 @@ namespace EvtTool
 
         public short ResourceMinorId { get; set; }
 
-        public int Field1C { get; set; }
+        [JsonConverter(typeof(HexStringJsonConverter))]
+        public uint Field1C { get; set; }
 
         public int AnimationMajorId { get; set; }
 
@@ -48,11 +50,11 @@ namespace EvtTool
             Id = reader.ReadInt32();
             Type = ( EvtObjectType ) reader.ReadInt32();
             Field08 = reader.ReadInt32();
-            Field0C = reader.ReadInt32();
+            DuplicateObjectIndex = reader.ReadInt32();
             ResourceMajorId = reader.ReadInt32();
             ResourceSubId = reader.ReadInt16();
             ResourceMinorId = reader.ReadInt16();
-            Field1C = reader.ReadInt32();
+            Field1C = reader.ReadUInt32();
             AnimationMajorId = reader.ReadInt32();
             AnimationMinorId = reader.ReadInt32();
             AnimationSubId = reader.ReadInt32();
@@ -65,7 +67,7 @@ namespace EvtTool
             writer.Write( Id );
             writer.Write( ( int ) Type );
             writer.Write( Field08 );
-            writer.Write( Field0C );
+            writer.Write( DuplicateObjectIndex );
             writer.Write( ResourceMajorId );
             writer.Write( ResourceSubId );
             writer.Write( ResourceMinorId );

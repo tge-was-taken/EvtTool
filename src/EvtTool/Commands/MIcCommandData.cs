@@ -9,14 +9,14 @@ namespace EvtTool
         public int Field00 { get; set; }
         [JsonConverter(typeof(StringEnumConverter))]
         public IconEnum Icon { get; set; }
-        public int Field08 { get; set; }
+        public int IconSizeIndex { get; set; }
         public int Field0C { get; set; }
 
         internal override void Read( Command command, EndianBinaryReader reader )
         {
             Field00 = reader.ReadInt32();
             Icon = (IconEnum)reader.ReadInt32();
-            Field08 = reader.ReadInt32();
+            IconSizeIndex = reader.ReadInt32();
             Field0C = reader.ReadInt32();
         }
 
@@ -24,7 +24,7 @@ namespace EvtTool
         {
             writer.Write( Field00 );
             writer.Write( (int)Icon );
-            writer.Write( Field08 );
+            writer.Write( IconSizeIndex );
             writer.Write( Field0C );
         }
 
@@ -42,6 +42,11 @@ namespace EvtTool
             Phone_Ringing = 15,
             Sweat = 16,
             Panic = 17,
+            Vert_Meow = 22,
+            Horiz_Meow_R = 23,
+            Horiz_Meow_L = 24,
+            SS_Sparkle = 25,
+            Sweat_Blue = 26,
         }
     }
 }

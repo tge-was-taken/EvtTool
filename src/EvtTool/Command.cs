@@ -19,7 +19,7 @@ namespace EvtTool
 
         public int ObjectId { get; set; }
 
-        public int Field0C { get; set; }
+        public int ForceSkipCommand { get; set; }
 
         public int Frame { get; set; }
 
@@ -30,6 +30,7 @@ namespace EvtTool
         [JsonConverter(typeof(StringEnumConverter))]
         public evtFlagType EvtFlagType { get; set; }
 
+        [JsonConverter(typeof(HexStringJsonConverter))]
         public uint EvtFlagId { get; set; }
 
         public int EvtFlagValue { get; set; }
@@ -46,13 +47,13 @@ namespace EvtTool
             Field04 = reader.ReadInt16();
             Field06 = reader.ReadInt16();
             ObjectId = reader.ReadInt32();
-            Field0C = reader.ReadInt32();
+            ForceSkipCommand = reader.ReadInt32();
             Frame = reader.ReadInt32();
             Duration = reader.ReadInt32();
             var dataOffset = reader.ReadInt32();
             DataSize = reader.ReadInt32();
             EvtFlagType = (evtFlagType)reader.ReadInt32();
-            EvtFlagId = reader.ReadUInt32(); FlagConvert();
+            EvtFlagId = reader.ReadUInt32(); // FlagConvert();
             EvtFlagValue = reader.ReadInt32();
             EvtFlagConditionalType = (evtFlagConditionalType)reader.ReadInt32();
 
@@ -69,7 +70,7 @@ namespace EvtTool
             writer.Write( (short)Field04 );
             writer.Write( (short)Field06 );
             writer.Write( ObjectId );
-            writer.Write( Field0C );
+            writer.Write( ForceSkipCommand );
             writer.Write( Frame );
             writer.Write( Duration );
             writer.ScheduleOffsetWrite( () => Data.Write( this, writer ) );
@@ -86,7 +87,8 @@ namespace EvtTool
             Adachi_False = 1,
             Evt_Local_Data = 2,
             Bitflag = 3,
-            Count = 4
+            Count = 4,
+            Evt_Anim_Data = 5
         }
 
         public enum evtFlagConditionalType

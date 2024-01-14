@@ -4,7 +4,7 @@ namespace EvtTool
 {
     public sealed class CsEcCommandData : CommandData
     {
-        public int Field00 { get; set; }
+        public int SomeBitfield { get; set; }
         public int Field04 { get; set; }
         public int Field08 { get; set; }
         public int Field0C { get; set; }
@@ -15,7 +15,7 @@ namespace EvtTool
 
         internal override void Read( Command command, EndianBinaryReader reader )
         {
-            Field00 = reader.ReadInt32();
+            SomeBitfield = reader.ReadInt32();
             Field04 = reader.ReadInt32();
             Field08 = reader.ReadInt32();
             Field0C = reader.ReadInt32();
@@ -27,7 +27,7 @@ namespace EvtTool
 
         internal override void Write( Command command, EndianBinaryWriter writer )
         {
-            writer.Write( Field00 );
+            writer.Write( SomeBitfield );
             writer.Write( Field04 );
             writer.Write( Field08 );
             writer.Write( Field0C );
